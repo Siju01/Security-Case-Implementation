@@ -19,7 +19,7 @@ namespace Client
             {
                 try
                 {
-                    Console.Write("IP of the server: ");
+                    Console.Write("IP server: ");
                     ipAdress = Console.ReadLine();
                     TcpClient client = new TcpClient(ipAdress, 600);
                     networkStream = client.GetStream();
@@ -27,15 +27,15 @@ namespace Client
                 }
                 catch
                 {
-                    Console.WriteLine("Cannot connect to given IP adress...");
+                    Console.WriteLine("Cannot connect...");
                 }
             } while (!ipCorrect);
 
-            Console.WriteLine("Connection established to: " + ipAdress + " \n");
+            Console.WriteLine("You already connect to " + ipAdress + " \n");
 
             while (true)
             {
-                Console.Write("Message to send: ");
+                Console.Write("Message: ");
                 byte[] bytesToSend = Convert.FromBase64String(EncyrptRSA(Console.ReadLine()));
                 networkStream.Write(bytesToSend, 0, bytesToSend.Length);
             }

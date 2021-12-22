@@ -1,189 +1,90 @@
 ﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
+using System.Security.Cryptography;
 
 namespace Server
 {
-    class ClientObject
-    {
-        public string Id { get; private set; }
-        public NetworkStream Stream { get; private set; }
-        string userName;
-        TcpClient client;
-        ServerObject server;
-        SaveData save = new SaveData();
-
-        //membuat id baru disetiap koneksi baru
-        public ClientObject(TcpClient tcpClient, ServerObject serverObject)
-        {
-            Id = Guid.NewGuid().ToString();
-            client = tcpClient;
-            server = serverObject;
-            serverObject.AddConnection(this);
-        }
-
-        //memproses data dari client 
-        public void Process()
-        {
-            try
-            {
-                Stream = client.GetStream();
-                string message = GetMessage();
-                userName = message;
-
-                message = userName + " entered the group";
-                server.BroadcastMessage(message, this.Id);
-                Console.WriteLine(message);
-
-                while (true)
-                {
-                    try
-                    {
-                        message = GetMessage();
-                        message = String.Format("{0}: {1}", userName, message);
-                        Console.WriteLine(message);
-                        server.BroadcastMessage(message, this.Id);
-
-                        save.writeMessage(message);
-                    }
-                    catch
-                    {
-                        message = String.Format("{0}: left the chat", userName);
-                        Console.WriteLine(message);
-                        server.BroadcastMessage(message, this.Id);
-                        break;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                server.RemoveConnection(this.Id);
-                Close();
-            }
-        }
-
-        //Menyimpan data ke dalam file .txt
-        class SaveData
-        {
-            private List<string> saveMessages = new List<string>();
-            public void writeMessage(string message)
-            {
-                saveMessages.Add(message);
-                File.WriteAllLines("D:/Pens/Semester 4/Arsitektur Jaringan & Komputer/FP MultiCLient/chats.txt", saveMessages);
-            }
-        }
-
-        //menerima data dari user client
-        private string GetMessage()
-        {
-            byte[] data = new byte[64];
-            StringBuilder builder = new StringBuilder();
-            int bytes = 0;
-
-            do
-            {
-                bytes = Stream.Read(data, 0, data.Length);
-                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-            }
-            while (Stream.DataAvailable);
-
-            return builder.ToString();
-        }
-
-        //close program
-        public void Close()
-        {
-            if (Stream != null)
-                Stream.Close();
-            if (client != null)
-                client.Close();
-        }
-    }
-
-    class ServerObject
-    {
-        static TcpListener tcpListener;
-        List<ClientObject> clients = new List<ClientObject>();
-
-        //menyambungkan koneksi 
-        public void AddConnection(ClientObject clientObject)
-        {
-            clients.Add(clientObject);
-        }
-
-        //memutuskan koneksi client
-        public void RemoveConnection(string id)
-        {
-            ClientObject client = clients.FirstOrDefault(c => c.Id == id);
-            if (client != null)
-                clients.Remove(client);
-        }
-
-        //memeriksa client yang terhubung ke server
-        public void Listen()
-        {
-            try
-            {
-                tcpListener = new TcpListener(IPAddress.Any, 8888);
-                tcpListener.Start();
-                Console.WriteLine("Server started");
-
-                while (true)
-                {
-                    TcpClient tcpClient = tcpListener.AcceptTcpClient();
-
-                    ClientObject clientObject = new ClientObject(tcpClient, this);
-                    Thread clientThread = new Thread(new ThreadStart(clientObject.Process));
-                    clientThread.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        //mengambil data dari pengirim dan menyebarkan ke penerima
-        public void BroadcastMessage(string message, string id)
-        {
-            byte[] data = Encoding.Unicode.GetBytes(message);
-
-            for (int i = 0; i < clients.Count; i++)
-            {
-                if (clients[i].Id != id)
-                {
-                    clients[i].Stream.Write(data, 0, data.Length);
-                }
-            }
-        }
-    }
-
-    //mencatat semua client yang masuk di fungsi main
     class Program
     {
-        static ServerObject server;
-        static Thread listenThread;
         static void Main(string[] args)
         {
-            try
+
+            string msg;
+
+            Console.WriteLine("Server started at " + GetLocalIPAddress());
+
+            TcpListener server = new TcpListener(IPAddress.Parse(GetLocalIPAddress()), 600);
+            server.Start();
+
+            Console.WriteLine("Waiting for the client...\n");
+            TcpClient client = server.AcceptTcpClient();
+            Console.WriteLine("Client connected!\n");
+
+            while (true)
             {
-                server = new ServerObject();
-                listenThread = new Thread(new ThreadStart(server.Listen));
-                listenThread.Start();
+
+                try
+                {
+                    NetworkStream networkStream = client.GetStream();
+                    byte[] buffer = new byte[client.ReceiveBufferSize];
+
+
+                    int bytesRead = networkStream.Read(buffer, 0, client.ReceiveBufferSize);
+                    msg = Convert.ToBase64String(buffer, 0, bytesRead);
+                    Console.WriteLine("Received Encrypted Message: " + msg + "\n");
+                    Console.WriteLine("Decryted Message: " + DecyrptRSA(msg) + "\n");
+
+                }
+                catch
+                {
+                    Console.WriteLine("Closing The Server...");
+                    break;
+                }
+
             }
-            catch (Exception ex)
+
+            client.Close();
+            server.Stop();
+        }
+
+        private static string DecyrptRSA(string message)
+        {
+
+            string privateKey = "<RSAKeyValue><Modulus>21wEnTU+mcD2w0Lfo1Gv4rtcSWsQJQTNa6gio05AOkV/Er9w3Y13Ddo5wGtjJ19402S71HUeN0vbKILLJdRSES5MHSdJPSVrOqdrll/vLXxDxWs/U0UT1c8u6k/Ogx9hTtZxYwoeYqdhDblof3E75d9n2F0Zvf6iTb4cI7j6fMs=</Modulus><Exponent>AQAB</Exponent><P>/aULPE6jd5IkwtWXmReyMUhmI/nfwfkQSyl7tsg2PKdpcxk4mpPZUdEQhHQLvE84w2DhTyYkPHCtq/mMKE3MHw==</P><Q>3WV46X9Arg2l9cxb67KVlNVXyCqc/w+LWt/tbhLJvV2xCF/0rWKPsBJ9MC6cquaqNPxWWEav8RAVbmmGrJt51Q==</Q><DP>8TuZFgBMpBoQcGUoS2goB4st6aVq1FcG0hVgHhUI0GMAfYFNPmbDV3cY2IBt8Oj/uYJYhyhlaj5YTqmGTYbATQ==</DP><DQ>FIoVbZQgrAUYIHWVEYi/187zFd7eMct/Yi7kGBImJStMATrluDAspGkStCWe4zwDDmdam1XzfKnBUzz3AYxrAQ==</DQ><InverseQ>QPU3Tmt8nznSgYZ+5jUo9E0SfjiTu435ihANiHqqjasaUNvOHKumqzuBZ8NRtkUhS6dsOEb8A2ODvy7KswUxyA==</InverseQ><D>cgoRoAUpSVfHMdYXW9nA3dfX75dIamZnwPtFHq80ttagbIe4ToYYCcyUz5NElhiNQSESgS5uCgNWqWXt5PnPu4XmCXx6utco1UVH8HGLahzbAnSy6Cj3iUIQ7Gj+9gQ7PkC434HTtHazmxVgIR5l56ZjoQ8yGNCPZnsdYEmhJWk=</D></RSAKeyValue>";
+
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048))
             {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    rsa.FromXmlString(privateKey);
+
+                    byte[] resultBytes = Convert.FromBase64String(message);
+                    byte[] decryptedBytes = rsa.Decrypt(resultBytes, true);
+                    string decryptedData = Encoding.UTF8.GetString(decryptedBytes);
+
+                    return decryptedData;
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
+                }
             }
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
     }
 }

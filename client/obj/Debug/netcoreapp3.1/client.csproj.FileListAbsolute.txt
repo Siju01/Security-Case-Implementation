@@ -1,0 +1,13 @@
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.exe
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.deps.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.runtimeconfig.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.runtimeconfig.dev.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\bin\Debug\netcoreapp3.1\client.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.csproj.AssemblyReference.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.AssemblyInfoInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.AssemblyInfo.cs
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.csproj.CoreCompileInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\client\obj\Debug\netcoreapp3.1\client.genruntimeconfig.cache

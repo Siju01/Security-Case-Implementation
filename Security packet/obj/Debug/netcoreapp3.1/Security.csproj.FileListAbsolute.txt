@@ -14,3 +14,19 @@ C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Server\obj\Debug\netcoreapp3.1\
 C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Server\obj\Debug\netcoreapp3.1\Security.dll
 C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Server\obj\Debug\netcoreapp3.1\Security.pdb
 C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Server\obj\Debug\netcoreapp3.1\Security.genruntimeconfig.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.exe
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.deps.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.runtimeconfig.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.runtimeconfig.dev.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\Security.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\DevOne.Security.Cryptography.BCrypt.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\bin\Debug\netcoreapp3.1\ExpressSecurity.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.csproj.AssemblyReference.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.AssemblyInfoInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.AssemblyInfo.cs
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.csproj.CoreCompileInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.csproj.CopyComplete
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\Security packet\obj\Debug\netcoreapp3.1\Security.genruntimeconfig.cache

@@ -1,0 +1,13 @@
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.exe
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.deps.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.runtimeconfig.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.runtimeconfig.dev.json
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\bin\Debug\netcoreapp3.1\srvr.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.csproj.AssemblyReference.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.AssemblyInfoInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.AssemblyInfo.cs
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.csproj.CoreCompileInputs.cache
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.dll
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.pdb
+C:\Pens\Semester 5\Pemrograman Jaringan Komputer\Security Case\Security-Case-Implementation\srvr\obj\Debug\netcoreapp3.1\srvr.genruntimeconfig.cache

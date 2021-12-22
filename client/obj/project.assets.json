@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\client\\client.csproj",
+      "projectUniqueName": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\Security Case\\Security-Case-Implementation\\client\\client.csproj",
       "projectName": "client",
-      "projectPath": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\client\\client.csproj",
+      "projectPath": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\Security Case\\Security-Case-Implementation\\client\\client.csproj",
       "packagesPath": "C:\\Users\\SIJU\\.nuget\\packages\\",
-      "outputPath": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\client\\obj\\",
+      "outputPath": "C:\\Pens\\Semester 5\\Pemrograman Jaringan Komputer\\Security Case\\Security-Case-Implementation\\client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\SIJU\\AppData\\Roaming\\NuGet\\NuGet.Config",

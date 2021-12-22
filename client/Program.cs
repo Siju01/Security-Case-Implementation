@@ -1,81 +1,66 @@
 ﻿using System;
-using System.Threading;
-using System.Net.Sockets;
 using System.Text;
+using System.Net.Sockets;
+using System.Security.Cryptography;
+
 namespace Client
 {
     class Program
     {
-        static string userName;
-        private const string host = "127.0.0.1";
-        private const int port = 8888;
-        static TcpClient client;
-        static NetworkStream stream;
-
-        //mencatat pesan yang masuk
         static void Main(string[] args)
         {
-            Console.Write("Enter your name: ");
-            userName = Console.ReadLine();
-            client = new TcpClient();
-            try
-            {
-                client.Connect(host, port);
-                stream = client.GetStream();
 
-                string message = userName;
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                stream.Write(data, 0, data.Length);
+            string ipAdress = "";
+            bool ipCorrect = false;
 
-                Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
-                receiveThread.Start();
-                Console.WriteLine("Welcome, " + userName);
-                SendMessage();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+            NetworkStream networkStream = null;
 
-        //mengirim pesan ke server
-        static void SendMessage()
-        {
-            Console.WriteLine("Type Your message: ");
-
-            while (true)
-            {
-                string message = Console.ReadLine();
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                stream.Write(data, 0, data.Length);
-            }
-        }
-
-        //memeriksa apakah ada data yang masuk
-        static void ReceiveMessage()
-        {
-            while (true)
+            do
             {
                 try
                 {
-                    byte[] data = new byte[64];
-                    StringBuilder builder = new StringBuilder();
-                    int bytes = 0;
-
-                    do
-                    {
-                        bytes = stream.Read(data, 0, data.Length);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-                        break;
-                    }
-                    while (stream.DataAvailable);
-                    string message = builder.ToString();
-                    Console.WriteLine(message);
+                    Console.Write("IP of the server: ");
+                    ipAdress = Console.ReadLine();
+                    TcpClient client = new TcpClient(ipAdress, 600);
+                    networkStream = client.GetStream();
+                    ipCorrect = true;
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.Write(e.Message);
-                    break;
+                    Console.WriteLine("Cannot connect to given IP adress...");
+                }
+            } while (!ipCorrect);
+
+            Console.WriteLine("Connection established to: " + ipAdress + " \n");
+
+            while (true)
+            {
+                Console.Write("Message to send: ");
+                byte[] bytesToSend = Convert.FromBase64String(EncyrptRSA(Console.ReadLine()));
+                networkStream.Write(bytesToSend, 0, bytesToSend.Length);
+            }
+        }
+
+        private static string EncyrptRSA(string message)
+        {
+            string publicKey = "<RSAKeyValue><Modulus>21wEnTU+mcD2w0Lfo1Gv4rtcSWsQJQTNa6gio05AOkV/Er9w3Y13Ddo5wGtjJ19402S71HUeN0vbKILLJdRSES5MHSdJPSVrOqdrll/vLXxDxWs/U0UT1c8u6k/Ogx9hTtZxYwoeYqdhDblof3E75d9n2F0Zvf6iTb4cI7j6fMs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048))
+            {
+                try
+                {
+                    rsa.FromXmlString(publicKey);
+
+                    byte[] encryptedData = rsa.Encrypt(Encoding.UTF8.GetBytes(message), true);
+
+                    string base64Encrypted = Convert.ToBase64String(encryptedData);
+                    Console.WriteLine("\nEncrypted Message: " + base64Encrypted + "\n");
+
+                    return base64Encrypted;
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
                 }
             }
         }
